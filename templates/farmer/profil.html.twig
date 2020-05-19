@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    {% include 'farmer/navbar.html.twig' %}
+
+{% endblock %}
+
+{% block content %}
+    <!--About Us Start-->
+    <section class="section" id="about" >
+        <div class="container">
+            <div class="row">
+                <!-- aboutus content -->
+                <div class="col-md-7 col-sm-12">
+                    <div class="section-title left">
+                        <span>{{ farmer.user.firstname }}</span>
+                        <h1>Informations</h1>
+                        <p>{{ farmer.address }}</p>
+                        <p>{{ farmer.postalCode }} {{ farmer.city }}</p>
+                    </div>
+                    <div class="about-contant">
+                            <a class="btn btn-theme margin-t-10" href="{{ path('edit_profil', {'id': app.user.id}) }}">Modifier mes informations <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <!-- end aboutus content -->
+
+                <!-- about right image -->
+                <div class="col-md-5 col-sm-12 ">
+                    <div class="text-center">
+                        {% if farmer.photoProfil is null %}
+                            <img src="/assets/images/farmer.jpg" style="width: 60%" class="avatar img-circle img-thumbnail " alt="avatar">
+                        {% else %}
+                            <img src="/uploads/{{ farmer.photoProfil }}" style="width: 60%" class="avatar img-circle img-thumbnail " alt="avatar">
+                        {% endif %}
+                    </div></hr><br>
+                </div>
+                <!-- about right image -->
+            </div>
+        </div>
+    </section>
+
+    <!--About End-->
+
+    <!-- feature section -->
+    <section class="two-box-section bg-dark">
+        <div class="container-fluid">
+            <div class="row equal-height">
+                <div class="col-md-6">
+                    {% if farmer.photoFarm is null %}
+                        <div class="box-bg" style="background-image: url(/assets/images/farm.jpg);"></div>
+                    {% else %}
+                        <div class="box-bg" style="background-image: url(/uploads/{{ farmer.photoFarm }});"></div>
+                    {% endif %}
+                </div>
+                <div class="col-md-6">
+                    <div class="box-contant">
+                        <span style="color: white" >Ma ferme</span>
+                        <h2 style="color: white" >{{ farmer.farmName }} </h2>
+                        <p>{{ farmer.farmDescription }}</p>
+{#
+                        <a class="btn btn-theme margin-t-10" href="{{ path('edit_profil') }}">Modifier mes informations <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--funfacts Start-->
+    <section class="counter" id="fun-facts">
+        <div class="container">
+            <div class="row">
+
+                <!-- factbox -->
+                <div class="col-md-3 col-sm-12">
+                    <div class="counter-inner">
+                        <i class="fas fa-apple-alt"></i>
+                        <h4 class="count-number">{{ farmer.productFarmers | length }}</h4>Nombre de Produits
+                    </div>
+                </div>
+                <!-- end factbox -->
+
+                <!-- factbox -->
+                <div class="col-md-3 col-sm-12">
+                    <div class="counter-inner">
+                        <i class="fas fa-book"></i>
+                        <h4 class="count-number">5</h4>Recettes conseillées
+                    </div>
+                </div>
+                <!-- end factbox -->
+
+                <!-- factbox -->
+                <div class="col-md-3 col-sm-12">
+                    <div class="counter-inner">
+                        <i class="icofont icofont-social-instagram"></i>
+                        <h4 class="count-number">{{ farmer.consumer | length }}</h4>Total Followers
+                    </div>
+                </div>
+                <!-- end factbox -->
+
+                <!-- factbox -->
+                <div class="col-md-3 col-sm-12">
+                    <div class="counter-inner last">
+                        <i class="fas fa-eye"></i>
+                        <h4 class="count-number">{{ farmer.CountView }}</h4>Vue de votre profil
+                    </div>
+                </div>
+                <!-- end factbox -->
+
+            </div>
+        </div>
+    </section>
+    <!--funfacts End-->
+    <!-- end feature section -->
+
+
+
+
+{% endblock %}

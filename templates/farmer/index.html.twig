@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    {% include 'farmer/navbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+
+    <section class="section" id="project">
+        <div class="container">
+            <div class="row">
+                <div class="section-title text-center">
+                    <span>Bonjour {{ farmer.user.firstName }}</span>
+                    <h1>Bienvenue dans votre ferme</h1>
+                </div>
+            </div>
+            <div class="row conatnt-row padding-card-farmer">
+
+                <!-- pricing-box -->
+                <div class="col-md-4 col-sm-4">
+                    <div class="pricing-box">
+                        <div class="pricing-icon">
+                            <i class="icofont icofont-businessman"></i>
+                        </div>
+                        <div class="pricing-heading">
+                            <h3>PROFIL</h3>
+                        </div>
+                        <div class="pricing-tag">
+                            <h1>{{ farmer.farmName }}</h1>
+                            <span>{{ farmer.city }}</span>
+                        </div>
+                        <ul class="pricing-list">
+                            <li>{{ farmer.user.firstName }}</li>
+                            <li>{{ farmer.user.lastName }}</li>
+                            <li>{% for product in farmer.productFarmers|slice(0, 3) %}
+                                    {{ product.product.name}}
+                                {% endfor %}
+                            </li>
+                        </ul>
+                        {#TODO modify ID by user id when sessions ok #}
+                        <a class="btn-border" href="{{ path('profil',{'id': 3}) }}">VOIR</a>
+
+                    </div>
+                </div>
+                <!-- end pricing-box -->
+
+                <!-- pricing-box -->
+                <div class="col-md-4 col-sm-4">
+                    <div class="pricing-box">
+                        <div class="pricing-icon">
+                            <i class="icofont icofont-pie-chart"></i>
+                        </div>
+                        <div class="pricing-heading">
+                            <h3>PRODUITS</h3>
+                        </div>
+                        <div class="pricing-tag">
+                            <h1>{{ countFarmerProduct }}</h1>
+                            <span>PROPOSES</span>
+                        </div>
+                        <ul class="pricing-list">
+                            {% for product in farmer.productFarmers|slice(0, 3) %}
+                            <li>{{ product.product.name }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a class="btn-border" href="{{ path('farmer_products', {'id': 3}) }}">VOIR</a>
+                    </div>
+                </div>
+                <!-- end pricing-box -->
+
+                <!-- pricing-box -->
+                <div class="col-md-4 col-sm-4">
+                    <div class="pricing-box">
+                        <div class="pricing-icon">
+                            <i class="icofont icofont-globe-alt"></i>
+                        </div>
+                        <div class="pricing-heading">
+                            <h3>RECETTES</h3>
+                        </div>
+                        <div class="pricing-tag">
+                            <h1>5</h1>
+                            <span>PROPOSES</span>
+                        </div>
+                        <ul class="pricing-list">
+                            <li>Trippes de porc aux grattons</li>
+                            <li>Gras double</li>
+                            <li>Langue de boeuf aux foies de volailles</li>
+                        </ul>
+                        <a class="btn-border" href="#">VOIR</a>
+                    </div>
+                </div>
+                <!-- end pricing-box -->
+            </div>
+        </div>
+    </section>
+{% endblock %}

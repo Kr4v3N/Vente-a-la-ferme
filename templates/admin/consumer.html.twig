@@ -1,0 +1,75 @@
+{% extends 'adminLayout.html.twig' %}
+{% block navbar %}
+    {% include 'admin/navbar.html.twig' %}
+{% endblock %}
+{% block body %}
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <!-- Header -->
+    <div class="w3-panel">
+        <div class="w3-row-padding" style="margin:0 -16px">
+
+            <div class="w3-twothird w3-padding-16">
+                <h1>Profil</h1>
+
+                <ul class="w3-ul w3-card-4 w3-white">
+                    <li class="w3-padding-16">
+                        <i class="material-icons w3-margin-right" style="width:35px">person</i>
+                        <span class="w3-large">{{ consumer.userName }}</span><br>
+                    </li>
+                    <li class="w3-padding-16">
+                        <i class="material-icons w3-margin-right" style="width:35px">person</i>
+                        <span class="w3-large">{{ consumer.user.lastName }}</span><br>
+                    </li>
+                    <li class="w3-padding-16">
+                        <i class="material-icons w3-margin-right" style="width:35px">mail</i>
+                        <span class="w3-large">{{ consumer.user.email }}</span><br>
+                    </li>
+                    <li class="w3-padding-16">
+                        <i class="material-icons w3-margin-right" style="width:35px">home</i>
+                        <span class="w3-large">{{ consumer.address }} {{ consumer.postalCode }} {{ consumer.city }}</span><br>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="w3-twothird w3-padding-16">
+                <h1>Ses fermes préférées</h1>
+                <table class="w3-table w3-striped w3-white ">
+                    <tr>
+                        <td><img class="w3-circle" src="http://www.cellierdelahautesambre.be/wp-content/uploads/2017/07/vegetables-1067269_960_720-150x150.jpg" style="width:30px;height:30px"></td>
+                        <td>La ferme du Pont</td>
+                        <td><i>les haricots sont top</i></td>
+                    </tr>
+                    <tr>
+                        <td><img class="w3-circle" src="http://www.cellierdelahautesambre.be/wp-content/uploads/2017/07/vegetables-1067269_960_720-150x150.jpg" style="width:30px;height:30px"></td>
+                        <td>A la Ferme</td>
+                        <td><i>prendre les pommes</i></td>
+                    </tr>
+                    <tr>
+                        <td><img class="w3-circle" src="http://www.cellierdelahautesambre.be/wp-content/uploads/2017/07/vegetables-1067269_960_720-150x150.jpg" style="width:30px;height:30px"></td>
+                        <td>La ferme du baudet</td>
+                        <td><i>beaucoup de variétés de tomates</i></td>
+                    </tr>
+                </table>
+            </div>
+            <hr>
+            <div class="w3-twothird">
+                <h1>Ses dernières visites</h1>
+                <div class="chart">
+                    <img src="/assets/images/chart.png" style="max-width: 100%">
+
+                </div>
+                <div>
+                    <a href="#" class="w3-button w3-round-large w3-green w3-xlarge" style="margin-left:10%">Envoyer un courriel</a>
+                    <button class="w3-btn w3-border w3-round-large w3-xlarge w3-red" >Supprimer</button>
+                </div>
+            </div>
+    </div>
+    <!-- End page content -->
+    </div>
+</div>
+
+    {% endblock %}

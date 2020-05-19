@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vente à la ferme</title>
+    <meta name="description" content="Bear The Perfect Tamplate">
+    <meta name="keywords" content="">
+    <meta name="author" content="Digital Vichar">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--FONTS-->
+    <link rel='shortcut icon' href="assets/images/farmer.png" type="image/ico"/>
+
+    <meta name="theme-color" content="#BCD531">
+    <!--FONTS-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="../assets/css/icofont.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    {{ encore_entry_link_tags('css-base') }}
+
+
+</head>
+<body style="display: flex; min-height: 100vh; flex-direction: column">
+<main style="flex: 1">
+
+<div class="loader"></div>
+
+<!--header start-->
+<div class="header-fix"></div>
+<header class="header-dark">
+    <div class="navbar navbar-default yamm container">
+        <!-- navbar-header -->
+        <div class="navbar-header">
+            <!-- menu Toggle -->
+            <button class="navbar-toggle" data-target="#navbar-collapse-grid" data-toggle="collapse" type="button"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+            <ul>
+                {#<li class="search-open hide-md">#}
+                    {#<!-- serachbar Toggle for mobile only -->#}
+                    {#<a href="#"><i class="fa fa-search"></i></a>#}
+                {#</li>#}
+                <li>
+                    <!--company logo-->
+                    <a class="navbar-brand" href="{{ path('home') }}"><img style="width: 60px; height: 60px" alt="logo" src="/assets/images/foodbasket.png"></a>
+                </li>
+            </ul>
+        </div><!--end navbar-header -->
+
+        <!--Navigation Start-->
+        {% block navbar %}{% endblock %}
+        <!--Navigation end-->
+    </div>
+</header>
+
+{% for label, messages in app.flashes %}
+    <div class="container">
+        <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message | raw }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+<!--Header End-->
+
+        {% block content %}{% endblock content %}
+
+</main>
+{% include 'part/_footer.html.twig' %}
+
+
+<!-- gallery modal -->
+<div class="modal fade" id="gallary-modal" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true"><i class="icofont icofont-close"></i></span>
+                </button>
+                <div class="modal-title" id="myModalLabel"></div>
+            </div>
+            <div class="modal-body"><img alt="works" class="showimage porfolio-img img-responsive" src="assets/images/footer-logo.png"></div>
+        </div>
+    </div>
+</div>
+<!-- gallery Modal -->
+
+
+<!-- consumer resistration start -->
+<div class="user-resistration">
+    <div class="hide-overelay"></div>
+    <div class="user-resistration-inner">
+
+        <!-- form close-->
+        <a href="#" class="form-close event">
+            <i class="icofont icofont-close-circled"></i>
+        </a>
+        <!-- end form close -->
+
+        <!-- left side graphics  -->
+        <div class="register-left-graphic" style="background-image: url(assets/images/log-graphic.jpg);"></div>
+        <!-- end left side graphics -->
+
+        <div class="register-forms">
+
+            <!--form sign in start-->
+            <form id="sign-in" name="sign-in">
+                <h1 class="register-form-title">Connexion</h1>
+                <input class="text-box" name="email" placeholder="Email" type="email">
+                <input class="text-box" name="password" placeholder="Mot de passe" type="password">
+                <div class="register-form-submit">
+                    <a class="forgot-password" href="#">Mot de passe oublié</a>
+                    <button class="btn btn-theme btn-small" type="submit">Connexion</button>
+                </div>
+                <div class="register-footer">
+                    Vous n'avez pas encore de compte <a href="#" id="btn-show-sign-up">Inscription</a>
+                </div>
+            </form>
+            <!--form sign in end-->
+
+            <!-- sign up -->
+            <form id="sign-up" name="sign-up">
+                <h1 class="register-form-title">Inscription</h1>
+                <input class="text-box" name="fullname" placeholder="Nom" type="text">
+                <input class="text-box" name="email" placeholder="Email" type="email">
+                <input class="text-box" name="password" placeholder="Mot de passe" type="password">
+                <input class="text-box" name="mobile" placeholder="téléphone" type="text">
+                <div class="register-form-submit">
+                    <button class="btn btn-theme btn-small" type="submit">Inscription</button>
+                </div>
+            </form>
+            <!-- end sign up -->
+
+            <!-- reset password -->
+            <form id="password-reset" name="password-reset">
+                <h1 class="register-form-title">Mot de passe oublié ?</h1>
+                <p class="form-tt">Entrez votre email et nous vous enverrons un lien pour modifier votre mot de passe</p>
+                <input class="text-box" name="email" placeholder="Entrez votre email" type="email">
+                <div class="register-form-submit">
+                    <button class="btn btn-theme btn-small" type="submit">Mot de passe oublié</button>
+                </div>
+            </form>
+            <!-- end reset password -->
+        </div>
+    </div>
+</div>
+<!--consumer resistration end -->
+{% if app.user and is_granted('ROLE_CONSUMER') or app.user is null %}
+
+    {{ render(controller('App\\Controller\\ConsumerController::myFollowers')) }}
+
+{% endif %}
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!-- end site demos -->
+<!--back to to -->
+<a class="BackToTop" href="#"><i class="fa fa-angle-up"></i></a>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+
+{{ encore_entry_script_tags('js-base') }}
+
+</body>
+</html>

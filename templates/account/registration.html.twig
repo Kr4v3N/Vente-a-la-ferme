@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block navbar %}
+        {% include 'farmer/navbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+
+
+        <div class="container" style="padding-top: 40px; ">
+                <div class="row">
+                        <h1 class="register-form-title" style="padding-left: 42%">Inscription</h1>
+
+                        {% if errors is not null %}
+                                <div class="row">
+                                        <div class="col-md-offset-1 col-md-10">
+                                                <div class="alert-danger">
+                                                        {% for error in errors %}
+                                                                <ul class="list-unstyled">
+                                                                        <li>
+                                                                                <span class="glyphicon glyphicon-bold glyphicon-exclamation-sign"></span>
+                                                                                {{ error }}
+                                                                        </li>
+                                                                </ul>
+                                                        {% endfor %}
+
+                                                </div>
+                                        </div>
+                                </div>
+                        {% endif %}
+
+                        <form id="sign-up" name="sign-up" method="post">
+                                <div class="col-md-1">&nbsp;</div>
+                                <div class="col-md-5">
+                                        <div class="bg-light py-3 px-3" style="padding-top: 21px">
+                                                {{ form_start(form) }}
+
+                                                {{ form_label(form.User.firstName) }}
+                                                {{ form_widget(form.User.firstName) }}
+
+                                                {{ form_label(form.User.lastName) }}
+                                                {{ form_widget(form.User.lastName) }}
+
+                                                {{ form_label(form.phone) }}
+                                                {{ form_widget(form.phone) }}
+
+                                                {{ form_label(form.User.email) }}
+                                                {{ form_widget(form.User.email) }}
+
+                                                {{ form_label(form.address) }}
+                                                {{ form_widget(form.address) }}
+
+                                                {{ form_label(form.postalCode) }}
+                                                {{ form_widget(form.postalCode) }}
+
+                                        </div>
+                                </div>
+                                <div class="col-md-2">&nbsp;</div>
+                                <div class="col-md-5">
+                                        <div class="bg-light py-3 px-3">
+                                                {{ form_label(form.city) }}
+                                                {{ form_widget(form.city) }}
+
+                                                {{ form_widget(form.lat) }}
+
+                                                {{ form_widget(form.lng) }}
+
+                                                {{ form_label(form.User.password) }}
+                                                {{ form_widget(form.User.password) }}
+
+                                                {{ form_label(form.User.passwordConfirm) }}
+                                                {{ form_widget(form.User.passwordConfirm) }}
+
+                                                {{ form_label(form.farmName) }}
+                                                {{ form_widget(form.farmName) }}
+
+                                                {{ form_label(form.farmDescription) }}
+                                                {{ form_widget(form.farmDescription) }}
+
+                                                {#{{ form_label(form.photoProfil) }}#}
+                                                {#{{ form_widget(form.photoProfil) }}#}
+
+                                                {#{{ form_label(form.photoFarm) }}#}
+                                                {#{{ form_widget(form.photoFarm) }}#}
+                                        </div>
+
+                                        <div class="padding-card-farmer">
+                                                <button class="btn btn-theme btn-small " type="submit">Confirmer l'inscription</button>
+                                        </div>
+
+                                        <br>
+                                        {% do form.schedule.setRendered %}
+
+                                        {{ form_end(form) }}
+
+
+                                </div>
+                        </form>
+
+                </div>
+        </div>
+
+
+{% endblock %}

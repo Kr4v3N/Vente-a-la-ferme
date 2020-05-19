@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{ encore_entry_link_tags('css-base') }}
+    <title>Vente à la ferme</title>
+    <link rel='shortcut icon' href="assets/images/farmer.png" type="image/ico"/>
+
+</head>
+<body>
+
+<!--end page-loader-->
+<div class="loader"></div>
+
+<!--searchbar start-->
+<div class="search-bar">
+    <form>
+        <input name="search" placeholder="Type Here" type="text"> <input class="search-btn" type="submit" value="Search">
+    </form>
+</div>
+<!--End Start-->
+
+<div class="parallax-hero particle-slider" data-parallax="scroll" data-image-src="{{ home.0.backgroundImage }}">
+    <div class="slide-overlay"></div>
+    <div id="particles-js"></div>
+    <div class="carousel-caption slider-text video-caption">
+        <div class="container">
+            <h1 class="animated fadeInLeft"><span style="size: A3 ; color: white">{{ home.0.MainTitle | slice(0,1) }}</span>{{ home.0.MainTitle | slice(1) }}</h1>
+
+
+            <!-- Trouvé une solution ici. -->
+
+            <form action="{{ path('consumer')}}">
+                <button type="submit" class="btn btn-themeHome margin-t-10 homeBtn" onclick="window.location.href{{ path('consumer') }}">Locavore</button>
+            </form>
+
+            {#trouve une solution pour le bouton ROLE FARMER#}
+
+            {% if app.user and is_granted('ROLE_FARMER') %}
+                <form action="{{ path('farmer_show', {'id' : app.user }) }}">
+                    <button type="submit" class="btn btn-themeHome margin-t-10 homeBtn" onclick="window.location.href{{ path('farmer_show', {'id' : app.user }) }}">Mon Dashboard</button>
+                </form>
+            {% else %}
+                <form action="{{ path('account_login') }}">
+                    <button type="submit" class="btn btn-themeHome margin-t-10 homeBtn" onclick="window.location.href{{ path('account_login') }}">Producteur</button>
+                </form>
+
+            {% endif %}
+
+        </div>
+    </div>
+    <nav>
+        <a href="#about" class="page-link mouse-scroll-down">
+            <img src="assets/images/scoll-down.png" alt="" />
+        </a>
+    </nav>
+
+</div>
+
+
+
+<section class="section" id="about">
+    <div class="container ">
+        <div class="row">
+            <!-- aboutus content -->
+            <div class="col-md-7 col-sm-12 ">
+                <div class="section-title left">
+                    <h1><span style="line-height : 1.5;" class="text-deco">{{ home.0.consummerTitle }}</span></h1>
+                </div>
+                <div class="about-contant ">
+                    <p>{{ home.0.consummerText | nl2br }}</p>
+
+                    <form action="{{ path('consumer')}}">
+                        <button type="submit" class="btn btn-themeHome margin-t-10 homeBtn" onclick="window.location.href{{ path('consumer') }}">Commencer</button>
+                    </form>
+
+                </div>
+            </div>
+            <!-- end aboutus content -->
+
+            <!-- about right image -->
+            <div class="col-md-5 col-sm-12 wow fadeIn">
+                <div class="about-right-side">
+                    <img class="img-responsive" src="/assets/images/leg.jpg" alt="about-side">
+                </div>
+            </div>
+            <!-- about right image -->
+        </div>
+    </div>
+
+</section>
+
+<section class="two-box-section bg-dark">
+    <div class="container-fluid">
+        <div class="row equal-height">
+            <div class="col-md-6">
+                <div class="box-bg" style="background-image: url(/assets/images/boite.jpg);" ></div>
+            </div>
+            <div class="col-md-6">
+                <div class="box-contant section-title left">
+                    <h1><span class="text-deco" style="color: white; line-height : 1.5;">{{ home.0.farmerTitle }}</span></h1>
+                    <p>{{ home.0.farmerText | nl2br }}</p>
+                    <ul class="box-listing">
+                    </ul>
+
+                    {% if app.user and is_granted('ROLE_FARMER') %}
+                        <form action="{{ path('farmer_show', {'id' : app.user }) }}">
+                            <button type="submit" class="btn btn-themeHome margin-t-10 homeBtn" onclick="window.location.href{{ path('farmer_show', {'id' : app.user }) }}">Mon Dashboard</button>
+                        </form>
+                    {% else %}
+                        <form action="{{ path('account_login') }}">
+                            <button type="submit" class="btn btn-themeHome margin-t-10 homeBtn" onclick="window.location.href{{ path('account_login') }}">Commencer</button>
+                        </form>
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section" id="clients">
+    <div class="container">
+        <div class="row">
+            <div class="section-title text-center ">
+                <h1> <span class="text-deco">Découvrez nos producteurs</span></h1>
+            </div>
+        </div>
+        <div class="row conatnt-row">
+
+            <!-- team-box -->
+
+            {% for farmer in farmers %}
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="team-member">
+                        <div class="profile">
+                            <a href="{{ path('farm_show', {'id' : farmer.id, 'slug' : farmer.user.slug }) }}">
+                            {% if farmer.photoFarm is null %}
+                                <img alt="" class="img-responsive" style="height: 200px; width: max-content;" src="/assets/images/farm.jpg">
+                            {% else %}
+                                <img alt="" class="img-responsive" style="height: 200px; width: max-content;" src="/uploads/{{ farmer.photoFarm }}">
+                            {% endif %}
+                            <div class="hover-profile">
+                                <div class="hover-contant">
+                                    <p>Decouvrez la ferme<br>de ce producteur !!</p>
+                                    <ul>
+                                        <li><i class="fa fa-apple"></i></li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <a href="{{ path('farm_show', {'id' : farmer.id, 'slug' : farmer.user.slug }) }}">
+                            <div class="team-footer">
+                                <h4 style="text-align: center">{{ farmer.user.firstname }} {{ farmer.user.lastname }}</h4>
+                                <p style="text-align: center">{{ farmer.city }}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- end team-box -->
+        </div>
+    </div>
+</section>
+
+<!--footer start-->
+
+{% include 'part/_footer.html.twig' %}
+
+<!--footer End-->
+
+{{ encore_entry_script_tags('js-base') }}
+
+</body>
+</html>

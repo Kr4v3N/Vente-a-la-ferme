@@ -1,0 +1,249 @@
+{% extends "base.html.twig" %}
+
+{% block navbar %}
+  {% include "farmer/navbar.html.twig" %}
+{% endblock %}
+
+{% block content %}
+
+
+<!-- site loader -->
+<div class="loader"></div>
+<!-- end site loader -->
+
+
+
+    <div class="parallax-hero" data-parallax="scroll" data-image-src="/assets/images/recipe.jpg">
+        <div class="slide-overlay"></div>
+        <div class="carousel-caption slider-text video-caption">
+            <div class="container">
+                <h1 class="animated fadeInLeft">Recettes.</h1>
+                <p class="animated fadeInUp">Partagez vos meilleurs Recettes, Pour le plaisir des papilles.</p><a class="" href="#">Commencez</a>
+            </div>
+        </div>
+
+    </div>
+<!-- project-->
+<section class="section bg-grey" id="project">
+    <div class="container">
+        <div class="row">
+            <div class="section-title text-center">
+                <span> VOS  </span>
+                <h1>RECETTES</h1>
+            </div>
+        </div>
+        <div class="row conatnt-row project">
+            <div class="col-md-12 text-center">
+                <!-- project navigation -->
+                <ul>
+                    <li class="active"><a id="showall">Recettes</a></li>
+                    <li><a class="showSingle" target="1">Fruits</a></li>
+                    <li><a class="showSingle" target="2">Legumes</a></li>
+                    <li><a class="showSingle" target="3">viandes</a></li>
+                    <li><a class="showSingle" target="4">Desserts</a></li>
+                    <li><a class="showSingle" target="5">Mixte</a></li>
+                </ul>
+                <!-- end project navigation -->
+            </div>
+
+            <!-- project-box -->
+            <div class="col-md-3 col-sm-6 col-xs-12 project-wrapper project1 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1">
+                <div class="project-box">
+                    <div class="featured-img">
+                        <img alt="" class="img-responsive" src="/assets/images/beef.jpg">
+                        <div class="hover-box">
+                            <p style="text-align: center"></p>
+                            <div class="hover-inner">
+                                <div class="links">
+                                    <a href="#"><i class="fa fa-link"></i></a>
+                                    <a class="img-zoom" data-img="assets/images/project1.jpg" data-target="#gallary-modal" data-title="Themforest" data-toggle="modal" href="#">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="project-details" href="#">
+                        <span class="project-title">Boeuf Bourguignon</span>
+                        <span class="project-category">Recette.</span>
+                    </a>
+                </div>
+            </div>
+            <!-- end project-box -->
+
+            <!-- project-box -->
+            <div class="col-md-3 col-sm-6 col-xs-12 project-wrapper project1 wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1">
+                <div class="project-box">
+                    <div class="featured-img">
+                        <img alt="" class="img-responsive" src="/assets/images/roti.jpg">
+                        <div class="hover-box">
+                            <div class="hover-inner">
+                                <div class="links">
+                                    <a href="#"><i class="fa fa-link"></i></a>
+                                    <a class="img-zoom" data-img="assets/images/project2.jpg" data-target="#gallary-modal" data-title="Themforest" data-toggle="modal" href="#">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="project-details" href="#">
+                        <span class="project-title">Rôti de Porc</span>
+                        <span class="project-category">Recette.</span>
+                    </a>
+                </div>
+            </div>
+            <!-- end project-box -->
+
+            <!-- project-box -->
+            <div class="col-md-3 col-sm-6 col-xs-12 project-wrapper project1 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="1">
+                <div class="project-box">
+                    <div class="featured-img">
+                        <img alt="" class="img-responsive" src="/assets/images/poulet.jpg">
+                        <div class="hover-box">
+                            <div class="hover-inner">
+                                <div class="links">
+                                    <a href="#"><i class="fa fa-link"></i></a>
+                                    <a class="img-zoom" data-img="assets/images/project3.jpg" data-target="#gallary-modal" data-title="Themforest" data-toggle="modal" href="#">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="project-details" href="#">
+                        <span class="project-title">Poulet Fermier au Four</span>
+                        <span class="project-category">Recette.</span>
+                    </a>
+                </div>
+            </div>
+            <!-- end project-box -->
+
+            <!-- project-box -->
+            <div class="col-md-3 col-sm-6 col-xs-12 project-wrapper project1 wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="1">
+                <div class="project-box">
+                    <div class="featured-img">
+                        <img alt="" class="img-responsive" src="/assets/images/lasa.jpg">
+                        <div class="hover-box">
+                            <div class="hover-inner">
+                                <div class="links">
+                                    <a href="#"><i class="fa fa-link"></i></a>
+                                    <a class="img-zoom" data-img="assets/images/project4.jpg" data-target="#gallary-modal" data-title="Themforest" data-toggle="modal" href="#">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="project-details" href="#">
+                        <span class="project-title">Lasagne de Boeuf</span>
+                        <span class="project-category">Recette.</span>
+                    </a>
+                </div>
+            </div>
+            <!-- end project-box -->
+
+            <!-- project-box -->
+            <div class="col-md-3 col-sm-6 col-xs-12 project-wrapper project2 project1 wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="1">
+                <div class="project-box">
+                    <div class="featured-img">
+                        <img alt="" class="img-responsive" src="/assets/images/leg2.jpg">
+                        <div class="hover-box">
+                            <div class="hover-inner">
+                                <div class="links">
+                                    <a href="#"><i class="fa fa-link"></i></a>
+                                    <a class="img-zoom" data-img="assets/images/project5.jpg" data-target="#gallary-modal" data-title="Themforest" data-toggle="modal" href="#">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="project-details" href="#">
+                        <span class="project-title">Sauté de Légumes frais</span>
+                        <span class="project-category">Recette.</span>
+                    </a>
+                </div>
+            </div>
+            <!-- end project-box -->
+
+            <!-- project-box -->
+            <div class="col-md-3 col-sm-6 col-xs-12 project-wrapper project2 project1 project3 wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="1">
+                <div class="project-box">
+                    <div class="featured-img">
+                        <img alt="" class="img-responsive" src="/assets/images/mout.jpg">
+                        <div class="hover-box">
+                            <div class="hover-inner">
+                                <div class="links">
+                                    <a href="#"><i class="fa fa-link"></i></a>
+                                    <a class="img-zoom" data-img="assets/images/project7.jpg" data-target="#gallary-modal" data-title="Themforest" data-toggle="modal" href="#">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="project-details" href="#">
+                        <span class="project-title">Poulet Moutarde</span>
+                        <span class="project-category">Recette.</span>
+                    </a>
+                </div>
+            </div>
+            <!-- end project-box -->
+
+            <!-- project-box -->
+            <div class="col-md-3 col-sm-6 col-xs-12 project-wrapper project2 project3 project4 wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="1">
+                <div class="project-box">
+                    <div class="featured-img">
+                        <img alt="" class="img-responsive" src="/assets/images/fruit.jpg">
+                        <div class="hover-box">
+                            <div class="hover-inner">
+                                <div class="links">
+                                    <a href="#"><i class="fa fa-link"></i></a>
+                                    <a class="img-zoom" data-img="assets/images/project8.jpg" data-target="#gallary-modal" data-title="Themforest" data-toggle="modal" href="#">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="project-details" href="#">
+                        <span class="project-title">Salade de Fruit </span>
+                        <span class="project-category">Recette.</span>
+                    </a>
+                </div>
+            </div>
+            <!-- end project-box -->
+
+            <!-- project-box -->
+            <div class="col-md-3 col-sm-6 col-xs-12 project-wrapper project2 project3 project4 project5 last wow fadeInUp" data-wow-delay="0.9s" data-wow-duration="1">
+                <div class="project-box">
+                    <div class="featured-img">
+                        <img alt="" class="img-responsive" src="/assets/images/gat.jpg">
+                        <div class="hover-box">
+                            <div class="hover-inner">
+                                <div class="links">
+                                    <a href="#"><i class="fa fa-link"></i></a>
+                                    <a class="img-zoom" data-img="assets/images/project9.jpg" data-target="#gallary-modal" data-title="Themforest" data-toggle="modal" href="#">
+                                        <i class="fa fa-search-plus"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="project-details" href="#">
+                        <span class="project-title">Crumble Fruit rouge </span>
+                        <span class="project-category">Recette</span>
+                    </a>
+                </div>
+            </div>
+            <!-- end project-box -->
+        </div>
+    </div>
+</section>
+<!--Project End-->
+
+{% endblock %}
+
+
+

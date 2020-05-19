@@ -1,0 +1,349 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    {% if app.user and is_granted('ROLE_FARMER') %}
+        {% include 'farmer/navbar.html.twig' %}
+    {% else %}
+        {% include 'consumer/navbar.html.twig' %}
+    {%endif %}
+{% endblock %}
+
+{% block content %}
+
+    <!-- feature section -->
+    <section class="two-box-section bg-dark">
+        <div class="container-fluid">
+            <div class="row equal-height">
+                <div class="col-md-6">
+
+                    <!-- VALABLE SEULEMENT POUR LES IMG GENERÉES AVEC FAKER -->
+                    {#<div class="box-bg" style="background-image: url({{ farmers.photoFarm }});"></div>#}
+
+                    <!-- POUR UNE IMG DE LA FERME UPLOADÉE À LA MAIN INDIQUER LE PATH DE "UPLOADS" -->
+                    {% if farmers.photoFarm is null %}
+                        <div class="box-bg" style="background-image: url(/assets/images/farm.jpg);"></div>
+                    {% else %}
+                        <div class="box-bg" style="background-image: url(/uploads/{{ farmers.photoFarm }});"></div>
+                    {% endif %}
+
+                </div>
+
+                <div class="col-md-6">
+
+                    I        <div style="background: #BCD531;">
+
+                        <h4 class="alert-heading padding-card-farmer">
+                            <div style="margin-left: 10px" class="row">
+                                <div class="col">
+                                    <strong style="font-size: 130%" >Note globale donnée par nos locavores</strong>
+                                </div>
+                                <div class="col padding-card-farmer" style="font-size: large">
+                                    {% include 'part/_rating.html.twig' with {'rating': farmers.averageScore} %}
+
+                                    <small>(Calculée sur {{ farmers.comments | length }} avis)</small>
+                                </div>
+                            </div>
+                        </h4>
+                    </div>
+                    <div class="box-contant">
+
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+
+                        {% if not form.vars.valid %}
+                            <div class="alert alert-danger">
+                                Vous avez une erreur dans le formulaire !
+                            </div>
+                        {% endif %}
+
+                        <h2>{{ farmers.farmName }}</h2>
+                        <p>{{ farmers.farmDescription | nl2br }} </p>
+                        <h3 style="color: white">Horaires d'ouverture : </h3>
+                        <h4 style="color: white">{{ farmers.schedule | nl2br }} </h4>
+                        <ul class="box-listing">
+                            <li><a href="#commentForm"><i class="fa fa-angle-double-right" style="font-size: medium"></i><span style="font-size: medium">Ajouter un commentaire</span></a></li>
+                            <li><a href="#commentsList"><i class="fa fa-angle-double-right" style="font-size: medium"></i><span style="font-size: medium">Les commentaires sur la ferme</span></a></li>
+
+                        </ul>
+
+                        <button class="btn btn-theme margin-t-10 margin-b-15" data-toggle="modal" data-target="#exampleModal">Appelez moi</button>
+                        <button class="btn btn-theme margin-t-10 margin-b-15" href="#" id="contactButton">Envoyer un email</button>
+
+                        {% if app.user and is_granted('ROLE_CONSUMER') %}
+
+                            {% if farmers in consumer.farmers %}
+                                <form action="{{ path('follow', {id : farmers.id }) }}">
+                                    <a class="btn btn-theme margin-t-10 margin-b-15" href="{{ path('follow', {id : farmers.id }) }}">Ne plus suivre <i class="fas fa-star"></i></a>
+                                </form>
+
+                            {% else %}
+                                <form action="{{ path('follow', {id : farmers.id }) }}">
+                                    <a class="btn btn-theme margin-t-10 margin-b-15" href="{{ path('follow', {id : farmers.id }) }}">Suivre <i class="fas fa-star"></i></a>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+
+                        <!-- Modal call me-->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="exampleModalLabel">Mon numéro</h3>
+                                    </div>
+                                    <h4 class="modal-body">
+                                        {{ farmers.phone }}
+                                    </h4>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End modal call me -->
+                        <!-- Contact form by email after clicking -->
+                        <div id="contactForm" class="margin-t-4"{% if not form.vars.submitted %} style="display: none;"{% endif %}>
+                            {{ form_start(form) }}
+                            <div class="row">
+                                <div class="col">
+                                    {{ form_errors(form.firstname) }}
+                                    {{ form_widget(form.firstname) }}
+                                </div>
+                                <div class="col">
+                                    {{ form_errors(form.lastname) }}
+                                    {{ form_widget(form.lastname) }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    {{ form_errors(form.phone) }}
+                                    {{ form_widget(form.phone) }}
+                                </div>
+
+                                <div class="col">
+                                    {{ form_errors(form.email) }}
+                                    {{ form_widget(form.email) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                {{ form_errors(form.message) }}
+                                {{ form_widget(form.message) }}
+                                <div class="form-group">
+                                    <button class="btn btn-theme">Envoyer</button>
+                                </div>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                        <!--End contact form by email after clicking -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- project-->
+    <section class=" bg-grey" id="project">
+        <div class="container">
+            <div class="row">
+                <div class="section-title text-center">
+
+                    <h1>Produits disponibles</h1>
+                </div>
+            </div>
+            <div class="row conatnt-row project">
+                <div class="col-md-12 text-center">
+                    <!-- product navigation -->
+                    <ul>
+                        <li class="active"><a id="showall">Vos produits</a></li>
+                        {% include 'part/_categoriesTabs.html.twig' %}
+                    </ul>
+                    <!-- end product navigation -->
+                </div>
+                {% for productFarmer in productsFarmer %}
+                    <!-- project-box -->
+                    <div class="col-md-3 col-sm-6 col-xs-12 project-wrapper project{{ productFarmer.product.category.id }} wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1">
+                        <div class="project-box">
+                            <div class="featured-img">
+                                {% if productFarmer.image is null %}
+                                    <img alt="produit" class="img-responsive" style="background-size: cover; height: 150px; width: max-content;" src="/assets/images/product_image.jpg">
+                                {% else %}
+                                <img alt="produit" class="img-responsive" style="height: 150px; object-fit: cover; width: max-content;" src="/uploads/{{ productFarmer.image }}">
+                                {% endif %}
+                                <div class="hover-box">
+                                    <div class="hover-inner">
+                                        <div class="links">
+                                            <a id="modalProduct" data-toggle="modal" href="#{{ productFarmer.id }}">
+                                                <i class="fa fa-search-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a class="project-details" href="#">
+                                <span class="project-title">{{ productFarmer.product.name }}</span>
+                                <span>{{ productFarmer.price }} €</span>
+                            </a>
+                        </div>
+                    </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="{{ productFarmer.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-md-4" style="margin-right: 15px;">
+                                                <img alt=""  style="height: 150px; object-fit: cover" src="/uploads/{{ productFarmer.image }}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Description : {{ productFarmer.product.description }}</p>
+                                                <p>Vendu par paquet de {{ productFarmer.weight }} kg</p>
+                                                <p>Prix kilo : {{ productFarmer.kiloPrice }} €/kg</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {#-- END MODAL --#}
+                    <!-- end project-box -->
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!--Project End-->
+
+    <!-- end feature section -->
+
+    <!--Pricing Start-->
+    <section class="section bg-grey" id="pricing">
+        <div class="container">
+            <div class="row content-row">
+
+                <!-- pricing-box -->
+                <div class="col-md-6 col-sm-6 ">
+                    <div class="pricing-box">
+                        <div class="pricing-icon">
+                            <i class="icofont icofont-businessman"></i>
+                        </div>
+                        <div class="pricing-heading">
+                            <h3>INFORMATIONS</h3>
+                            <hr>
+                        </div>
+                        <div class="pricing-tag">
+                            <h1>{{ farmers.farmName }}</h1>
+                        </div>
+                        <ul class="pricing-list">
+                            <li>{{ farmers.user.fullName }}</li>
+                            <li>{{ farmers.address }}</li>
+                            <li>{{ farmers.phone }}</li>
+                            <li>{{ farmers.user.email }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end pricing-box -->
+
+                <!-- pricing-box -->
+                <div class="col-md-6 col-sm-6">
+                    <div class="pricing-box">
+                        <div class="pricing-icon">
+                            <i class="icofont icofont-map"></i>
+                        </div>
+                        <div class="pricing-heading">
+                            <h3>LOCALISATION</h3>
+                            <hr>
+                            <div id="mapfarm" style=" height: 268px;z-index: 1;"
+                                 data-lat="{{ farmers.lat }}" data-lng="{{ farmers.lng }}"></div>
+                        </div>
+                        <!-- end pricing-box -->
+
+                    </div>
+                </div>
+    </section>
+
+
+    <div class="container margin-b-30" id="commentForm">
+        <div class="row">
+            <div class="col-md-8 mb-3">
+
+                {% if app.user and is_granted('ROLE_CONSUMER') %}
+
+                <section id="commentForm">
+                    <hr>
+                    {# RATE A FARM #}
+                    <div class="alert alert-light">
+                        <h2 class="alert-heading">Votre commentaire</h2>
+                        {#{% if app.user != null %}#}
+                        {% set comment = farmers.commentFromAuthor(app.user) %}
+                        {% if comment is not null %}
+                            <blockquote>
+                                {{ comment.content }}
+                            </blockquote>
+                            <strong>Note :</strong> {% include 'part/_rating.html.twig' with {'rating': comment.rating} %}
+                        {% else %}
+                            {{  form_start(form1) }}
+                            {{  form_widget(form1) }}
+                            <button class="btn btn-theme  btn-small" type="submit">Confirmer</button>
+                            {{  form_end(form1) }}
+                        {% endif %}
+
+                        {#{% endif %}#}
+
+                        {% elseif app.user == null%}
+                            <p>Pour noter cette ferme, <a href="{{ path('account_login') }}" style="color: #BCD531">connectez-vous !</a></p>
+                        {% endif %}
+                    </div>
+                </section>
+                {# END RATE FARM #}
+
+                <hr>
+                <hr>
+                <section id="commentsList">
+                    {% if farmers.comments | length > 0  %}
+
+                        <h2 style="margin-left: 10px" class="mb-3">Commentaires de nos locavores :</h2>
+
+                        {% for comment in farmers.comments %}
+                            <hr>
+                            <div class="bg-light rounded mb-3 py-3 px-3">
+                                <strong>{{ comment.author.firstName }}</strong> a dit :
+                                <blockquote>
+                                    {{ comment.content }}
+                                </blockquote>
+
+                                <strong>Note donnée par {{ comment.author.firstName }} </strong>
+
+                                {% include 'part/_rating.html.twig'  with {'rating': comment.rating}%}
+
+                            </div>
+                        {% endfor %}
+
+                    {% else %}
+                        <h4>Cette ferme n'a pas encore reçu de commentaires ...</h4>
+                    {% endif %}
+                    <!--Pricing end-->
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

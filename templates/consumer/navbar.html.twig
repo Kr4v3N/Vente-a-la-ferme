@@ -1,0 +1,47 @@
+
+
+<nav class="navbar-collapse collapse" id="navbar-collapse-grid">
+    <ul class="nav navbar-nav navbar-right" id="mainNav">
+
+        {#{{ dump(consumer) }}#}
+        {% if app.user and is_granted('ROLE_CONSUMER') %}
+        <li>
+            <a class="page-link" href="{{ path('consumer') }}">Accueil</a>
+        </li>
+        <li>
+            <a title="profil" class="page-link" href="{{ path('consumer_profil') }}">{{ consumer.userName }}
+                {% if consumer.profilPicture is null %}
+                    <img style="max-height: 40px" src="/assets/images/avatar2.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                {% else %}
+                    <img style="max-height: 40px" src="/uploads/{{ consumer.profilPicture }}" class="avatar img-circle img-thumbnail " alt="avatar">
+                {% endif %}
+            </a>
+        </li>
+        <li>
+            <a class="page-link" href="{{ path('account_logout') }}">Déconnexion</a>
+        </li>
+
+        {% else %}
+            <li>
+                <a class="page-link" href="{{ path('consumer') }}">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('account_consumer_register') }}" class="nav-link">Inscription</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('account_login') }}" class="nav-link">Connexion</a>
+            </li>
+        {% endif %}
+
+    </ul>
+</nav>
+
+{#<!--serchbar start-->#}
+{#<div class="search-bar">#}
+    {#<form>#}
+        {#<input name="search" placeholder="Type Here" type="text"> <input class="search-btn" type="submit" value="Search">#}
+    {#</form>#}
+{#</div>#}
+
+
+{#<!--End Start-->#}

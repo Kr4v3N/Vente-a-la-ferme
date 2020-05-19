@@ -1,0 +1,59 @@
+
+<nav class="navbar-collapse collapse" id="navbar-collapse-grid">
+    <ul class="nav navbar-nav navbar-right" id="mainNav">
+
+
+        {#app.user est une variable global#}
+        {% if app.user and is_granted('ROLE_FARMER') %}
+            <li>
+                <a class="page-link" href="{{ path('consumer') }}">Votre ferme</a>
+            </li>
+            <li>
+                <a class="page-link" href="{{ path('farmer_products') }}">Produits</a>
+            </li>
+            <li>
+                <a class="page-link" href="{{ path('new_product') }}">Nouveau produit</a>
+            </li>
+            {#<li>#}
+                {#<a class="page-link" href="{{ path('recipe') }}">Recettes</a>#}
+            {#</li>#}
+            <li>
+                <a class="page-link" href="{{ path('email') }}">Newsletter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('profil') }}">Mon compte</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('account_logout') }}" class="nav-link">Déconnexion</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a href="{{ path('account_register') }}" class="nav-link">Inscription</a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ path('account_login') }}" class="nav-link">Connexion</a>
+            </li>
+        {% endif %}
+
+        {#<li class="sign-in-open">#}
+            {#<a class="event" href="#">Sign in</a>#}
+        {#</li>#}
+
+
+
+        {#<li class="search-open hide-mobile">#}
+            {#<a class="event" href="#"><i class="fa fa-search"></i></a>#}
+    </ul>
+</nav>
+
+{#<!--serchbar start-->#}
+
+{#<div class="search-bar">#}
+    {#<form>#}
+        {#<input name="search" placeholder="Type Here" type="text"> <input class="search-btn" type="submit" value="Search">#}
+    {#</form>#}
+{#</div>#}
+
+
+{#<!--End Start-->#}
+

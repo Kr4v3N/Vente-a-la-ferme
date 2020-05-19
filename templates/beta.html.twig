@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    {% include 'consumer/navbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+
+    <section style="padding-top: 35px">
+
+        <div class="container">
+
+            <h3 style="text-align: center; padding-bottom: 20px;">Nos fermiers</h3>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    {% for farmer in farmers %}
+                    <div style="padding-bottom: 20px;" class="col-md-6">
+                        <div style="padding-bottom: 20px;" class="featured-blog-box">
+                            <div class="featured-img">
+                                <img alt="" src="{{ farmer.photoFarm }}">
+                                <div class="featured-lable-blog">
+                                    <p class="admin-lable">
+                                        <i class="icofont icofont-user-alt-7"></i> {{ farmer.user.fullName }}
+                                    </p>
+
+                                    <p class="blog-date">
+                                        <i class="icofont icofont-ui-calendar"></i> {{ (farmer.user.createAt | date("d.m.Y") ) }}
+                                    </p>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                            <a href="{{ path('farm_show', {id: farmer.id, slug: farmer.slug}) }}"
+                               class="featured-data">
+                                <div class="blog-title">{{ farmer.farmName }}</div>
+                                <div class="blog-description">
+                                    {{ farmer.farmDescription [:90] ~ '...' }}
+                                </div>
+                            </a>
+                            <div class="blog-description text-center">
+                                {% if farmer.comments | length > 0 %}
+                                    <div style="padding-bottom:10px">
+                                        Évaluation : {% include 'part/_rating.html.twig' with {'rating': farmer.averageScore} %}
+                                    </div>
+
+                                {% else %}
+                                    <div style="color: orangered; padding-bottom: 10px;">
+                                        Aucune Évaluation
+                                    </div>
+                                {% endif %}
+
+                                <button href="#sectionMap" id="mapButton" class="btn btn-success btn btn-block" onclick="changeMarkerPos({{ farmer.lat }}, {{ farmer.lng }}); document.documentElement.scrollTop = 0"><i class="fas fa-map-marker-alt"></i> Localiser</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+
+                <div class="col-md-6">
+                    <div style="height: 500px" class="map" id="map"></div>
+                </div>
+
+
+                <div class="col-md-6 text-center">
+
+                    <!-- Barre de recherche  -->
+                    <div class="blog-sidebar" style="padding: 60px 0 60px 0;">
+                        <div class="side-bar-title">
+                            Recherche
+                        </div>
+                        <form action="{{ path('consumer') }}" method="post">
+                            <div class="input-group subscribe-group">
+                                <input class="form-control" name="choice" placeholder="Lieux, adresse, produits" type="text">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="input-group-btn">Recherche</span>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- fin barre de recherche -->
+
+                    <!-- catagory -->
+                    <div class="blog-sidebar">
+                        <div class="side-bar-title">
+                            Filtrer par catégories
+                        </div>
+                        <ul class="catagory-list">
+                            {% for category in categories %}
+                                <li>
+                                    <a href="{{ path('consumer', { 'id': category.id}) }}">{{ category.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <!-- end catagory -->
+
+
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row justify-content-center">
+                <div class="col-3 text-center">
+                    {{ knp_pagination_render(farmers) }}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script type="text/javascript">
+
+        let new_lat = 45.764042; // ici les latitude de l'user.
+        let new_lng = 4.835659; // ici les longitude de l'user.
+
+        let map;
+        let marker;
+        let infowindow;
+        let link = "http://127.0.0.1:8000/consumer/farm/";
+
+
+        function initMap() {
+
+            let locations = [
+                {% for farmer in farmers %}
+                ["{{ farmer.farmName }}", {{ farmer.lat }}, {{ farmer.lng }}, {{ farmer.id }}, "{{ farmer.farmDescription }}", {{ farmer.id }}, "{{ farmer.slug }}"],
+                {% endfor %}
+            ];
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: new google.maps.LatLng(new_lat, new_lng),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            infowindow = new google.maps.InfoWindow();
+
+            for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    animation: google.maps.Animation.DROP,
+                    map: map
+                });
+
+                let content = '<div> <h4>' + locations[i][0] + '</h4>' + '<p>' + locations[i][4] + '</p><br/> <br/> <a href="' + link + locations[i][5] + '-' + locations[i][6] + '">Fiche de la ferme</a></div>';
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent(content);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            }
+
+        }
+
+        function changeMarkerPos(lat, lon) {
+            let myLatLng = new google.maps.LatLng(lat, lon);
+            marker.setPosition(myLatLng);
+            map.setZoom(12);
+            map.panTo(myLatLng);
+
+        }
+
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJMqSZgwvVasqXTm2FbQ-MlbM7O55xPl0&callback=initMap">
+    </script>
+
+
+{% endblock %}

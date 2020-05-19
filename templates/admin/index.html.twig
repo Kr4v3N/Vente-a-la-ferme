@@ -1,0 +1,63 @@
+{% extends '@EasyAdmin/default/layout.html.twig' %}
+
+{% block content_title %}
+    <div class="row">
+        <div class="col-10">
+            <strong><i class="fa fa-dashboard"></i> Mon tableau de bord</strong>
+        </div>
+        <div class="col-2">
+            <a href="{{ path("account_logout") }}"><p style="text-align: center; color: white; border-radius: 5px; background-color: orangered; ">Déconnexion</p></a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    {#{% extends 'adminLayout.html.twig' %}#}
+
+
+    <!-- !PAGE CONTENT! -->
+    <div class="container" style="display: flex;">
+
+        <div class="col-lg-4 col-sm-12 col-md-6 ">
+            <div class="bg-grey" style="margin-left:30px;margin-top:30px;margin-bottom: 30px;">
+                <div class="" style="background-color:#4F86C6; color: white; padding: 15px 15px 15px 15px"; >
+                    <i class="fa fa-user"></i>
+                    <h3>{{ countConsumers }}</h3>
+                    <h4> Nombre total d'utilisateurs</h4>
+                    <br>
+                    <i class="fa fa-bell"></i>
+                    <h3>{{ countLastConsumers }}</h3>
+                    <h4>Inscrits ces 7 derniers jours</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="bg-grey" style="margin-left:30px;margin-top:30px;">
+                <div class="" style="background-color:#4FB0C6; color: white; padding: 15px 15px 15px 15px"; >
+                    <i class="fa fa-home"></i>
+                    <h3>{{ countFarmers }}</h3>
+                    <h4> Nombre total de producteurs</h4>
+                    <br>
+                    <i class="fa fa-bell"></i>
+                    <h3>{{ countLastFarmers }}</h3>
+                    <h4>Inscrits ces 7 derniers jours</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="bg-grey" style="margin-left:30px;margin-top:30px;">
+                <div class="" style="background-color:#379392; color: white; padding: 15px 15px 15px 15px"; >
+                    <i class="fa fa-shopping-basket"></i>
+                    <h3>{{ countProducts }}</h3>
+                    <h4> Nombre total de produits</h4>
+                    <br>
+                    <div class="w3-left">
+                        <i class="fa fa-share-alt w3-xxlarge"></i></div>
+                    <h3>{{ countFavorites }}</h3>
+                    <h4> Nombre de fermes en favoris</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

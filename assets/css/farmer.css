@@ -1,0 +1,23 @@
+/* frontfarmer homepage - index1.html.twig view  */
+
+.padding-card-farmer {
+    padding: 20px 0;
+}
+
+/* img homepage recipe - showrecipe.html.twig */
+
+.recette {
+    max-width: 300px !important;
+}
+
+
+.avatar {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
+}
+
+.avatar-medium {
+    max-width: 64px;
+    max-height: 64px;
+}

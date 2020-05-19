@@ -1,0 +1,78 @@
+easy_admin:
+    site_name: '<img src="/assets/images/foodbasket.png" />'
+    design:
+        brand_color: 'green'
+        assets:
+            favicon: '/assets/images/farmer.png'
+            css:
+                - 'bundles/easyadmin/bootstrap-all.css'
+            js:
+                - 'bundles/easyadmin/bootstrap-all.js'
+        menu:
+        - { label: 'Tableau de bord', route: 'admin_dashboard', default: true, icon: 'home' }
+        - { entity: 'Comment', icon: 'tag' }
+        - { entity: 'Consumer', icon: 'user' }
+        - { entity: 'Farmer', icon: 'bicycle' }
+        - { entity: 'Homepage', icon: 'bomb' }
+        - { entity: 'Product', icon: 'beer' }
+        - { entity: 'ProductCategory', icon: 'birthday-cake' }
+        - { entity: 'ProductFarmer', icon: 'codepen' }
+        - { entity: 'Role', icon: 'user-secret' }
+        - { entity: 'User', icon: 'blind' }
+
+    formats:
+        datetime: 'd/m/Y H:i:s'
+    entities:
+        Comment:
+            class: App\Entity\Comment
+            label: 'Commentaires'
+            list:
+                title: "Tous les commentaires"
+        Consumer:
+            class: App\Entity\Consumer
+            label: 'Locavores'
+            list:
+                title: "Tous les locavores"
+            form:
+                title: 'Ajouter un locavore'
+                form_options: { validation_groups: ['Default'] }
+                new:
+                    form_options: { validation_groups: ['Default', 'Customer'] }
+                edit:
+                    title:  'Editer un locavore'
+        Farmer:
+            class: App\Entity\Farmer
+            label: 'Producteurs'
+            list:
+                title: "Tous les producteurs"
+        Homepage:
+            class: App\Entity\Homepage
+            label: "Page d'accueil"
+            list:
+                title: "Page d'accueil"
+                fields: ['id', 'mainTitle', 'consummerTitle', 'farmerTitle']
+        Product:
+            class: App\Entity\Product
+            label: "Produits"
+            list:
+                title: "Tous les produits"
+        ProductCategory:
+            class: App\Entity\ProductCategory
+            label: "Catégorie de produit"
+            list:
+                title: "Tous les catégorie de produit"
+        ProductFarmer:
+            class: App\Entity\ProductFarmer
+            label: "Produits de producteur"
+            list:
+                title: "Tous les produits de producteur"
+        Role:
+            class: App\Entity\Role
+            label: "Roles"
+            list:
+                title: "Tous les roles"
+        User:
+            class: App\Entity\User
+            label: "Utilisateurs"
+            list:
+                title: "Tous les utilisateurs"

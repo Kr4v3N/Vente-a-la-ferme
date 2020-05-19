@@ -1,0 +1,32 @@
+{% extends 'adminLayout.html.twig' %}
+{% block navbar %}
+    {% include 'admin/navbar.html.twig' %}
+{% endblock %}
+{% block body %}
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <!-- Header -->
+    <header class="w3-container" style="padding-top:22px">
+        <h1><b><i class="fa fa-dashboard"></i>Tous les consommateurs inscrits</b></h1>
+    </header>
+
+    <div class="w3-container w3-xlarge">
+        <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+            {% for consumer in consumers %}
+                <tr >
+                    <td>{{ consumer.userName }}</td>
+                    <td>{{ consumer.user.lastName }}</td>
+                    <td>{{ consumer.user.email }}</td>
+                    <td><a href="{{ path ('admin_show_consumer', {'id': consumer.id}) }}"><i class="fa fa-eye fa-fw"></i></a></td>
+                    <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
+                    <td><i class="fa fa-trash fa-fw"></i></td>
+                </tr>
+            {% endfor %}
+        </table><br>
+    </div>
+    <!-- End page content -->
+</div>
+
+{% endblock %}

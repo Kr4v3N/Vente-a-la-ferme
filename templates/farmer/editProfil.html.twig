@@ -1,0 +1,187 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    {% include 'farmer/navbar.html.twig' %}
+
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    <div class="container bootstrap snippet section">
+        <div class="row">
+            <div class="col-sm-3"><!--left col-->
+
+
+                <div class="text-center">
+                    {% if farmer.photoProfil is null %}
+                        <img src="/assets/images/farmer.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
+                    {% else %}
+                        <img src="/uploads/{{ farmer.photoProfil }}" class="avatar img-circle img-thumbnail" alt="avatar">
+                    {% endif %}
+                    {{ form_label(form.photoProfil) }}
+                    {{ form_widget(form.photoProfil) }}
+                    {{ form_errors(form.photoProfil) }}
+                </div></hr><br>
+
+
+            </div><!--/col-3-->
+            <div class="col-sm-9">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Mes informations</a></li>
+                    <li><a data-toggle="tab" href="#messages">Ma ferme</a></li>
+                </ul>
+
+                    <h3>Modifier mes informations</h3>
+                <div class="tab-content">
+
+                    <div class="tab-pane active" id="home">
+                        <hr>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    {{ form_label(form.User.firstName) }}
+                                    {{ form_widget(form.User.firstName) }}
+                                    {{ form_errors(form.User.firstName) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    {{ form_label(form.User.lastName) }}
+                                    {{ form_widget(form.User.lastName) }}
+                                    {{ form_errors(form.User.lastName) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    {{ form_label(form.phone) }}
+                                    {{ form_widget(form.phone) }}
+                                    {{ form_errors(form.phone) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    {{ form_label(form.User.email) }}
+                                    {{ form_widget(form.User.email) }}
+                                    {{ form_errors(form.User.email) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    {{ form_label(form.address) }}
+                                    {{ form_widget(form.address) }}
+                                    {{ form_errors(form.address) }}
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    {{ form_label(form.postalCode) }}
+                                    {{ form_widget(form.postalCode) }}
+                                    {{ form_errors(form.postalCode) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    {{ form_label(form.city) }}
+                                    {{ form_widget(form.city) }}
+                                    {{ form_errors(form.city) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <a class="forgot-password" href="{{ path('password_update') }}">modifier votre mot de passe</a>
+                                </div>
+                            </div>
+
+
+                        <hr>
+
+                    </div>
+
+                    <!--/tab-pane-->
+                    <div class="tab-pane" id="messages">
+                        <hr>
+
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    {#<label for="first_name"><h4>Nom</h4></label>#}
+                                    {#<input type="text" class="form-control" name="first_name" id="first_name" placeholder="{{ farmer.farmName }}" title="enter your first name if any.">#}
+                                    {{ form_label(form.farmName) }}
+                                    {{ form_widget(form.farmName) }}
+                                    {{ form_errors(form.farmName) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+
+                                <div class="col-xs-12">
+                                    {#<label for="description"><h4>Description de votre ferme</h4></label>#}
+                                    {#<textarea class="form-control" name="message" rows="10" placeholder="{{ farmer.farmDescription }}"></textarea>#}
+                                    {{ form_label(form.farmDescription) }}
+                                    {{ form_widget(form.farmDescription) }}
+                                    {{ form_errors(form.farmDescription) }}
+                                </div>
+                                <div class="col-xs-12">
+                                    {#<label for="description"><h4>Description de votre ferme</h4></label>#}
+                                    {#<textarea class="form-control" name="message" rows="10" placeholder="{{ farmer.farmDescription }}"></textarea>#}
+                                    {{ form_label(form.schedule) }}
+                                    {{ form_widget(form.schedule) }}
+                                    {{ form_errors(form.schedule) }}
+                                </div>
+                                <div class="col-xs-12">
+                                    {#<label for="description"><h4>Description de votre ferme</h4></label>#}
+                                    {#<textarea class="form-control" name="message" rows="10" placeholder="{{ farmer.farmDescription }}"></textarea>#}
+                                    <img src="/uploads/{{ farmer.photoFarm }}" class="avatar img-thumbnail" style="max-width: 300px; max-height: 300px" alt="avatar">
+                                    <br/>
+                                    {{ form_label(form.photoFarm) }}
+                                    {{ form_widget(form.photoFarm) }}
+                                    {{ form_errors(form.photoFarm) }}
+                                </div>
+                                {{ form_widget(form.lat) }}
+
+                                {{ form_widget(form.lng) }}
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-success">{{ button_label|default('Modifier votre profil') }}</button>
+                                    {#<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Sauvegarder</button>#}
+                                    {#<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>Annuler</button>#}
+{#
+                                    <button class="btn">{{ button_label|default('Update') }}</button>
+#}
+                                </div>
+                            </div>
+
+                        {{ form_rest(form) }}
+
+                        {{ form_end(form) }}
+                    </div>
+
+                </div><!--/tab-pane-->
+            </div><!--/tab-content-->
+
+        </div><!--/col-9-->
+    </div><!--/row-->
+
+    <div style="text-align: center">
+    <form method="post" action="{{ path('delete_farmer') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ farmer.id) }}">
+        <button class="btn btn-danger">Supprimer votre compte</button>
+    </form>
+
+    <br>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+/* ADMINISTRATOR */
+
+html,body,h1,h2,h3,h4,h5 {
+    font-family: "Raleway", sans-serif
+}
+
+html {
+    font-family: Verdana, sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+    font-weight: normal;
+}
+
+.welcome {
+    font-size: 18px;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Segoe UI", Verdana, sans-serif;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px 0;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    font-weight: inherit;
+}
+
+h1 {font-size: 36px}
+h2 {font-size: 30px}
+h3 {font-size: 30px}
+h4 {font-size: 20px}
+h5 {font-size: 18px}
+h6 {font-size: 16px}
+
+hr {
+    height: 0;
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 40px 0;
+}
+
+/* media query administrator */
+
+@media screen and (min-width: 601px) and (max-width: 1035px) {
+    h4 {font-size: 15px}
+    h3 {font-size: 20px}
+}
+
+
+/* login button*/
+.green{
+    background-color: #BCD531 !important;
+
+}
+
+/* END ADMINISTRATOR */

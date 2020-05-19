@@ -1,0 +1,76 @@
+{% extends 'adminLayout.html.twig' %}
+{% block navbar %}
+    {% include 'admin/navbar.html.twig' %}
+{% endblock %}
+{% block body %}
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <!-- Header -->
+    <div class="w3-panel">
+        <div class="w3-row-padding" style="margin:0 -16px">
+
+            <div class="w3-container">
+                <h1>Ferme : {{ farmer.farmName }}</h1>
+                <ul class="w3-ul w3-card-4 w3-white">
+                    <li class="w3-padding-16">
+                        <i class="material-icons w3-margin-right" style="width:35px">person</i>
+                        <span class="w3-large">{{ farmer.user.firstName }}</span><br>
+                    </li>
+                    <li class="w3-padding-16">
+                        <i class="material-icons w3-margin-right" style="width:35px">person</i>
+                        <span class="w3-large">{{ farmer.user.lastName }}</span><br>
+                    </li>
+                    <li class="w3-padding-16">
+                        <i class="material-icons w3-margin-right" style="width:35px">mail</i>
+                        <span class="w3-large">{{ farmer.user.email }}</span><br>
+                    </li>
+                    <li class="w3-padding-16">
+                        <i class="material-icons w3-margin-right" style="width:35px">phone</i>
+                        <span class="w3-large"></span><br>{{ farmer.phone }}
+                    </li>
+                    <li class="w3-padding-16">
+                        <i class="material-icons w3-margin-right" style="width:35px">home</i>
+                        <span class="w3-large">{{ farmer.address }}</span><br>
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div class="w3-container">
+                <h3>Descriptif</h3>
+                <div class="w3-row">
+                    <div class="w3-col m2 text-center">
+                        <img class="w3-circle" src="https://fermesdavenir.org/wp-content/uploads/avatars/524/57a078b2eb95a-bpfull.jpg" style="width:96px;height:96px">
+                    </div>
+                    <div class="w3-col m10 w3-container">
+                        <h4>{{ farmer.farmName }}</h4>
+                        <p>{{ farmer.farmDescription }}</p><br>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="w3-twothird">
+                <h3>Produits proposés</h3>
+                <table class="w3-table w3-striped w3-white">
+                    {% for productFarmer in farmer.productFarmers %}
+                        <tr>
+                            <td><img class="w3-circle" src="/uploads/{{ productFarmer.image }}" style="width:30px;height:30px"></td>
+                            <td>{{ productFarmer.product.name }}</td>
+                            <td><i>{{ productFarmer.kiloPrice }} €/kg</i></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div>
+    <a href="#" class="w3-button w3-round-large w3-green w3-xlarge" style="margin-left: 2%">Envoyer un courriel</a>
+    <button class="w3-btn w3-border w3-round-large w3-xlarge w3-red" >Supprimer</button>
+    </div>
+    <!-- End page content -->
+</div>
+
+{% endblock %}
+

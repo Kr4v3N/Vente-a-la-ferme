@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    {% include 'farmer/navbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <!-- products-->
+    <section class="section bg-grey" id="project">
+        <div class="container">
+            <div class="row">
+                <div class="section-title text-center">
+                    <span>Vos Produits</span>
+                    {#<h1>Votre amour du savoir faire français en un seul clic</h1>#}
+                    <a class="btn-border" href="{{ path('new_product') }}">Ajouter un nouveau produit</a>
+                </div>
+            </div>
+
+            <div class="row conatnt-row project">
+                <div class="col-md-12 text-center">
+                    <!-- product navigation -->
+                    <ul>
+                        <li class="active"><a id="showall">Vos produits</a></li>
+
+                        {% include 'part/_categoriesTabs.html.twig' %}
+
+                    </ul>
+                    <!-- end product navigation -->
+                </div>
+
+                <!-- product-box -->
+                {% for productFarmer in productsFarmer %}
+
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 project-wrapper project{{ productFarmer.product.category.id }} wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="1">
+                        <div class="project-box">
+                            <div class="featured-img">
+                                {% if productFarmer.image is null %}
+                                    <img alt="produit" class="img-responsive" style="background-size: cover; height: 150px; width: max-content;" src="/assets/images/product_image.jpg">
+                                {% else %}
+                                    <img alt="produit" class="img-responsive" style="background-size: cover; height: 150px; width: max-content;" src="/uploads/{{ productFarmer.image }}">
+                                {% endif %}
+                                <div class="hover-box">
+                                    <div class="hover-inner">
+                                        <div class="links">
+
+                                            {#delete one product#}
+
+                                            <a href="{{ path('product_delete', {'id' : productFarmer.id }) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')"><i class="fas fa-trash-alt"></i></a>
+
+                                            {#ancienne modal #}
+                                            {#<a class="img-zoom" data-img="/uploads/{{ productFarmer.image }}" data-target="#gallary-modal" data-title="Themforest" data-toggle="modal" href="#">#}
+                                            {#<i class="fas fa-pencil-alt"></i>#}
+                                            {#</a>#}
+
+                                            <div class="bs-example">
+                                                <!-- Button HTML (to Trigger Modal) -->
+                                                <a href="#myModal{{ productFarmer.id }}" data-toggle="modal"><i class="fas fa-pencil-alt"></i></a>
+                                                {#<a href="{{ path('product_edit', {'id' : productFarmer.id}) }}"><i class="fas fa-pencil-alt"></i></a>#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {#modal start#}
+
+                                <!-- Modal HTML -->
+                                <div id="myModal{{ productFarmer.id }}" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            {#{{ productFarmer.product.name }}#}
+                                            <div style="background-color: #252c3e" class="modal-header">
+                                                <h1  style="margin-top: 10px; color: #EAEAEA" class="register-form-title">Modifier le produit</h1>
+                                            </div>
+
+                                            <form action="{{ path('edit_product', {'id': productFarmer.id}) }}" method="post" enctype="multipart/form-data">
+                                                <div style="margin: 0 30px">
+                                                    <div class="form-group">
+                                                        <label for="name">Nom</label>
+                                                        <input type="text" name="name" id="name" class="form-control" placeholder="Nom..." value="{{ productFarmer.product.name }}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="category">Catégorie
+                                                            <select name="category">
+                                                                <option value="{{ productFarmer.product.category.name }}">{{ productFarmer.product.category.name }}</option>
+
+                                                                {% for category in productCategory %}
+                                                                    {% if productFarmer.product.category.name != category.name %}
+                                                                    <option value="{{ category.name }}">{{ category.name }}</option>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </select>
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="description">Description</label>
+                                                        <input type="text" name="description" id="description" class="form-control" placeholder="Description..." value="{{ productFarmer.product.description }}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="image">Image</label>
+                                                        <input type="file" name="image" id="image" class="form-control" placeholder="image..." value="{{ productFarmer.image }}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="price">Prix</label>
+                                                        <input type="text" name="price" id="price" class="form-control" placeholder="Prix..." value="{{ productFarmer.price }}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="weight">Poids</label>
+                                                        <input type="text" name="weight" id="weight" class="form-control" placeholder="Poids..." value="{{ productFarmer.weight }}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="kiloPrice">Prix au kilo</label>
+                                                        <input type="text" name="kiloPrice" id="kiloPrice" class="form-control" placeholder="Prix au kilo..." value="{{ productFarmer.kiloPrice }}">
+                                                    </div>
+
+                                                </div>
+                                                <div style="background-color: #252c3e" class="modal-footer">
+                                                    <div class="register-form-submit">
+                                                        <button class="btn btn-theme btn-small" type="submit">Editer</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {# modal end#}
+
+                            </div>
+                            <a class="project-details" href="#">
+                                <span class="project-title">{{ productFarmer.product.name }}</span>
+                                <span class="project-category">{{ productFarmer.product.category }}</span>
+                            </a>
+                            {#{{ dump(productFarmer.product) }}#}
+                        </div>
+                    </div>
+
+                {% endfor %}
+                <!-- end product-box -->
+
+            </div>
+        </div>
+    </section>
+    <!--Project End-->
+
+
+
+{% endblock %}

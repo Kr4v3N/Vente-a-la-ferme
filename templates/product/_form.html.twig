@@ -1,0 +1,29 @@
+{{ form_start(form) }}
+
+                            {#{{ form_label(form.product.name) }}#}
+                            {{ form_row(form.product.name, { 'label': 'Nom :' }) }}
+                            {#{{ form_errors(form.product.name) }}#}
+
+                            {{ form_row(form.product.category, { 'label': 'Catégorie :' }) }}
+                            {#{{ form_errors(form.product.category) }}#}
+
+                            {{ form_row(form.product.description, { 'label': 'Description :' }) }}
+                            {#{{ form_errors(form.product.description) }}#}
+
+                            {{ form_row(form.image, { 'label': 'Image :' }) }}
+                            {#{{ form_errors(form.image) }}#}
+
+                            {{ form_row(form.price, { 'label': 'Prix :' }) }}
+                            {#{{ form_errors(form.price) }}#}
+
+                            {{ form_row(form.weight, { 'label': 'Poids :' }) }}
+                            {#{{ form_errors(form.weight) }}#}
+
+                            {{ form_row(form.kiloPrice, { 'label': 'Prix au kilo :' }) }}
+                            {#{{ form_errors(form.kiloPrice) }}#}
+
+                                {#{% do form.farmer.farmName.setRendered %}#}
+<button type="submit" class="btn btn-theme pull-right">Ajouter</button>
+<div class="clearfix"></div>
+
+{{ form_end(form) }}

@@ -1,0 +1,11 @@
+
+    {% set categoriesFarmer = [] %}
+    {% for categoryFarmer in productsFarmer %}
+        {% if categoryFarmer.product.category not in categoriesFarmer %}
+            {% set categoriesFarmer = categoriesFarmer|merge([categoryFarmer.product.category]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% for category in categoriesFarmer %}
+        <li><a class="showSingle" target="{{ category.id }}">{{ category }}</a></li>
+    {% endfor %}

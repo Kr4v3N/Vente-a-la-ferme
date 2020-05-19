@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de  {{ user.FullName }}!{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-3 test-center">
+                <img src="{{ farmer.photoProfil }}" class="avatar mb-3" alt="Avatar de {{ user.fullName }} ">
+                <br>
+                <span class="badge badge-primary">5 produits</span>
+            </div>
+            <div class="col-5">
+                <h1>{{ user.fullName }}</h1>
+                {#verifier que l utilisateur est bien le vrai utilisateur pour pouvoir modifier ces informatiosn#}
+                {% if user is same as(app.user) %}
+                <div class="mt-3">
+                    <a href="{{ path('account_profile') }}" class="btn btn-primary mr-2 mb-2">Modifier mes informations</a>
+                </div>
+
+                {% endif %}
+            </div>
+        </div>
+        <h2>{{ farmer.farmName }}</h2>
+        <p>{{ farmer.farmDescription }}</p>
+    </div>
+
+{% endblock %}

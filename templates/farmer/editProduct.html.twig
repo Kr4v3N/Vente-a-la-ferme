@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    {% include 'farmer/navbar.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="">
+
+    <!-- feature section -->
+    <section style="border-bottom: 2px solid #bcd531" class="two-box-section bg-dark">
+        <div class="container-fluid">
+            <div style="display: flex; align-items: center; flex-wrap: wrap" class="row">
+                <div class="col-md-6 col-xs-12">
+                    <img style="padding: 30px" class="img-responsive" src="/assets/images/4238.jpg">
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="box-contant">
+                        <h2>Editer un produit</h2>
+
+                        {{ form_start(form) }}
+
+                        {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-theme pull-right">Ajouter</button>
+                            <div class="clearfix"></div>
+
+                        {{ form_end(form) }}
+
+
+                        <ul class="box-listing">
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i>Smart and beautiful design</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end feature section -->
+</div>
+
+{% endblock %}

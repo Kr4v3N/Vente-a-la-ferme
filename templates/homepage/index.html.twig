@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        {{ encore_entry_link_tags('css-base') }}
+    </head>
+    <body>
+
+    <!--end page-loader-->
+    <div class="loader"></div>
+
+    <!--searchbar start-->
+    <div class="search-bar">
+        <form>
+            <input name="search" placeholder="Type Here" type="text"> <input class="search-btn" type="submit" value="Search">
+        </form>
+    </div>
+    <!--End Start-->
+
+    <div class="parallax-hero particle-slider" data-parallax="scroll" data-image-src="{{ absolute_url(homepages.0.backgroundImage) }}">
+        <div class="slide-overlay"></div>
+        <div id="particles-js"></div>
+        <div class="carousel-caption slider-text video-caption">
+            <div class="container">
+                <h1 class="animated fadeInLeft"><span style="size: A3 ; color: white">{{ homepages.0.MainTitle | slice(0,1) }}</span>{{ homepages.0.MainTitle | slice(1) }}</h1>
+
+
+                <!-- Trouvé une solution ici. -->
+
+                <form action="/consummer/index">
+                    <button type="submit" class="btn btn-theme margin-t-10 homeBtn" onclick="window.location.href('/consumer/index')">Locavore</button>
+                </form>
+                <button class="btn btn-theme margin-t-10 homeBtn event sign-in-open" href="">Producteur</button>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- CAMILOOOOOOOOOOOOOOO -->
+
+
+    <!-- consumer resistration start -->
+    <div class="user-resistration">
+        <div class="hide-overelay"></div>
+        <div class="user-resistration-inner">
+
+            <!-- form close-->
+            <a href="#" class="form-close event">
+                <i class="icofont icofont-close-circled"></i>
+            </a>
+            <!-- end form close -->
+
+            <!-- left side graphics  -->
+            <div class="register-left-graphic" style="background-image: url(/assets/images/farmer3.jpg);"></div>
+            <!-- end left side graphics -->
+
+            <div class="register-forms">
+
+                <!--form sign in start-->
+                <form id="sign-in" name="sign-in">
+                    <h1 class="register-form-title">Connexion</h1>
+                    <input class="text-box" name="email" placeholder="Email" type="email">
+                    <input class="text-box" name="password" placeholder="Mot de passe" type="password">
+                    <div class="register-form-submit">
+                        <a class="forgot-password" href="#">Mot de passe oublié?</a>
+                        <a href="" class="btn btn-theme btn-small" type="submit">Connexion</a>
+                    </div>
+                    <div class="register-footer">
+                        Vous n'avez pas de compte? <a href="#" id="btn-show-sign-up">S' inscrire</a>
+                    </div>
+                </form>
+                <!--form sign in end-->
+
+                <!-- sign up -->
+                <form id="sign-up" name="sign-up">
+                    <h1 class="register-form-title">S' inscrire</h1>
+                    <input class="text-box" name="fullname" placeholder="Nom" type="text">
+                    <input class="text-box" name="email" placeholder="Email" type="email">
+                    <input class="text-box" name="password" placeholder="Mot de passe" type="password">
+                    <input class="text-box" name="mobile" placeholder="Numéro de téléphone" type="text">
+                    <div class="register-form-submit">
+                        <a href="" class="btn btn-theme btn-small" type="submit">Inscription</a>
+                    </div>
+                </form>
+                <!-- end sign up -->
+
+                <!-- reset password -->
+                <form id="password-reset" name="password-reset">
+                    <h1 class="register-form-title">Réinitialiser mon mot de passe</h1>
+                    <p class="form-tt">
+                        Veuillez entrer l'adresse e-mail avec laquelle vous vous êtes inscrit et nous vous enverrons un lien de réinitialisation du mot de passe.</p>
+                    <input class="text-box" name="email" placeholder="Entrer votre Email" type="email">
+                    <div class="register-form-submit">
+                        <button class="btn btn-theme btn-small" type="submit">Réinitialiser mon mot de passe</button>
+                    </div>
+                </form>
+                <!-- end reset password -->
+
+            </div>
+        </div>
+    </div>
+    <!--consumer resistration end -->
+
+
+    <section class="section" id="about">
+        <div class="container ">
+            <div class="row">
+                <!-- aboutus content -->
+                <div class="col-md-7 col-sm-12 ">
+                    <div class="section-title left">
+                        <h1><span class="text-deco">{{ homepages.0.consummerTitle }}</span></h1>
+                    </div>
+                    <div class="about-contant ">
+                        <p>{{ homepages.0.consummerText }}</p>
+                        <p> </p>
+                        <a class="btn btn-theme margin-t-10 " href="#">Commencer</a>
+                    </div>
+                </div>
+                <!-- end aboutus content -->
+
+                <!-- about right image -->
+                <div class="col-md-5 col-sm-12 wow fadeIn">
+                    <div class="about-right-side">
+                        <img class="img-responsive" src="{{ homepages.0.consummerImage }}" alt="about-side">
+                    </div>
+                </div>
+                <!-- about right image -->
+            </div>
+        </div>
+
+    </section>
+
+    <section class="two-box-section bg-dark">
+        <div class="container-fluid">
+            <div class="row equal-height">
+                <div class="col-md-6">
+                    <div class="box-bg" style="background-image: url(/{{ homepages.0.farmerImage }});"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box-contant section-title text-center ">
+                        <h2><span class="text-deco" style="color: white">{{ homepages.0.farmerTitle }}</span></h2>
+                        <p>{{ homepages.0.farmerText }}</p>
+                        <ul class="box-listing">
+                        </ul>
+                        <a class="btn btn-theme margin-t-10" href="#">Commencez</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section" id="clients">
+        <div class="container">
+            <div class="row">
+                <div class="section-title text-center ">
+                    <h1> <span class="text-deco">Découvrez nos producteurs</span></h1>
+                </div>
+            </div>
+            <div class="row conatnt-row">
+
+                <!-- team-box -->
+                <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.2s">
+                    <div class="team-member">
+                        <div class="profile">
+                            <img alt="" class="img-responsive" src="/assets/images/women22.jpg">
+                            <div class="hover-profile">
+                                <div class="hover-contant">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-footer">
+                            <h4>Céline vaisse</h4>
+                            <p>Producteur de légumes</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end team-box -->
+
+                <!-- team-box -->
+                <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInLeft">
+                    <div class="team-member">
+                        <div class="profile">
+                            <img alt="" class="img-responsive" src="/assets/images/men12.jpg">
+                            <div class="hover-profile">
+                                <div class="hover-contant">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-footer">
+                            <h4>Pierre Garond</h4>
+                            <p>Eleveur</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end team-box -->
+
+                <!-- team-box -->
+                <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInRight">
+                    <div class="team-member">
+                        <div class="profile">
+                            <img alt="" class="img-responsive" src="/assets/images/men89.jpg">
+                            <div class="hover-profile">
+                                <div class="hover-contant">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-footer">
+                            <h4>Rachid Elawi</h4>
+                            <p>Producteur de fruits</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end team-box -->
+
+                <!-- team-box -->
+                <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInRight" data-wow-delay="0.2s">
+                    <div class="team-member last">
+                        <div class="profile">
+                            <img alt="" class="img-responsive" src="/assets/images/women32.jpg">
+                            <div class="hover-profile">
+                                <div class="hover-contant">
+                                    <p>There are many variations of passages of Lorem available, but the There are many variations of passages of</p>
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="team-footer">
+                            <h4>maria Roades</h4>
+                            <p>Eleveuse</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- end team-box -->
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+
+                <!-- footer column -->
+                <div class="col-md-5 col-sm-6 col-xs-12 f-1">
+                    <img alt="" class="logo-footer" src="assets/images/">
+                    <p>vous pouvez nous suivre sur nos differents réseaux sociaux afin de suivre toutes l'actualité liée à nos producteurs locaux.</p>
+                    <ul class="social-media">
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end footer column -->
+
+                <!-- footer column -->
+                <div class="col-md-2 col-sm-6 col-xs-12 f-2">
+                    <h3 class="footer-title">Nos liens</h3>
+                    <nav>
+                        <ul class="footer-list">
+                            <li>
+                                <a class="page-link-home" href="index.html">Accueil</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="about-us.html">A propos</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="services.html">Services</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="gallery.html">photos</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="contact-us.html">Nous contactez</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- end footer column -->
+
+                <!-- footer column -->
+                <div class="col-md-2 col-sm-6 col-xs-12 f-3">
+                    <h3 class="footer-title">Mais encore</h3>
+                    <nav>
+                        <ul class="footer-list">
+                            <li>
+                                <a class="page-link" href="home-creative.html">Recettes</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="home-business.html">Vente</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="home-parallax.html">Produits</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="home-video.html">Video</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="home-particle.html">Producteur</a>
+                            </li>
+                            <li>
+                                <a class="page-link" href="coming-soon.html">Prochainement</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- end footer column -->
+
+                <!-- footer column -->
+                <div class="col-md-3 col-sm-6 col-xs-12 f-4">
+                    <h3 class="footer-title">Vos Photos</h3>
+                    <div class="footer-list">
+
+                        <div class="row-footer">
+                            <div class="col-md-4">
+                                <a class="img-zoom" data-img="assets/images/gallery-1-big.jpg" data-target="#gallary-modal" data-title="Lorem Ipsum is simply caption" data-toggle="modal" href="#">
+                                    <img alt="" class="img-responsive" src="assets/images/gallery-1.jpg">
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="img-zoom" data-img="assets/images/gallery-2-big.jpg" data-target="#gallary-modal" data-title="Lorem Ipsum is simply caption" data-toggle="modal" href="#">
+                                    <img alt="" class="img-responsive" src="assets/images/gallery-2.jpg">
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="img-zoom" data-img="assets/images/gallery-3-big.jpg" data-target="#gallary-modal" data-title="Lorem Ipsum is simply caption" data-toggle="modal" href="#">
+                                    <img alt="" class="img-responsive" src="assets/images/gallery-3.jpg">
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="img-zoom" data-img="assets/images/gallery-4-big.jpg" data-target="#gallary-modal" data-title="Lorem Ipsum is simply caption" data-toggle="modal" href="#">
+                                    <img alt="" class="img-responsive" src="assets/images/gallery-4.jpg">
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="img-zoom" data-img="assets/images/gallery-5-big.jpg" data-target="#gallary-modal" data-title="Lorem Ipsum is simply caption" data-toggle="modal" href="#">
+                                    <img alt="" class="img-responsive" src="assets/images/gallery-5.jpg">
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="img-zoom" data-img="assets/images/gallery-6-big.jpg" data-target="#gallary-modal" data-title="Lorem Ipsum is simply caption" data-toggle="modal" href="#">
+                                    <img alt="" class="img-responsive" src="assets/images/gallery-6.jpg">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="input-group subscribe-group">
+                                    <input class="form-control" placeholder="Enter Email" type="text">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">
+                                            <span class="input-group-btn">Subscribe</span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end footer column -->
+
+            </div>
+        </div>
+    </footer>
+    <!--footer End-->
+
+    {{ encore_entry_script_tags('js-base') }}
+
+    </body>
+    </html>

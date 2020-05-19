@@ -1,0 +1,16 @@
+{% extends 'adminLayout.html.twig' %}
+{% block navbar %}
+    {% include 'admin/navbar.html.twig' %}
+{% endblock %}
+{% block body %}
+
+<div class="w3-container" style="margin-left:300px;margin-top:43px;">
+
+    <h1>Create new Homepage</h1>
+
+    {{ include('homepage/_form.html.twig') }}
+
+    <a href="{{ path('homepage_index') }}">back to list</a>
+
+</div>
+{% endblock %}

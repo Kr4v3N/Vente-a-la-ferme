@@ -1,0 +1,230 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+{% include 'consumer/navbar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+
+
+    <!-- blog content -->
+    <div class="blod-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+
+                    <!-- blog post -->
+                    <div class="blog-left">
+                        <img class="img-responsive margin-b-20" src="assets/images/blog-feature.jpg" alt="blog-feature">
+                        <h2 class="blog-caption">La ferme du bonheur</h2>
+                        <div class="post-controls">
+                            <span>
+                                <i class="fa fa-phone"></i> 04-25-44-67-43 </span>
+                            <span>
+                                <i class="fa fa-address-book"></i> 11 rue de la gare 69009 LYON</span>
+                            <span>
+                            </span>
+                        </div>
+                        <p>
+                            Description de la ferme du bonheur Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi blanditiis consectetur, corporis cumque esse expedita hic incidunt itaque maxime nobis quae, quaerat quasi, quibusdam quo reiciendis sint tempora veniam!
+                        </p>
+
+                    </div>
+                </div>
+                <!--end blog post -->
+
+                <!-- side-bar -->
+                <div class="col-md-4">
+
+
+                    <!-- Informations -->
+                    <div class="blog-sidebar">
+                        <div class="side-bar-title">
+                            Informations
+                        </div>
+                        <ul class="catagory-list">
+                            <li>
+                                <a href="#"><i class="fa fa-phone"></i> 04-78-64-84-73</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-address-book"></i> 11 rue de la gare</a>
+                            </li>
+                            <li>
+                                <button class="btn btn-success btn-block">Questions ?</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end informations -->
+
+                    <!-- catagory -->
+                    <div class="blog-sidebar">
+                        <div class="side-bar-title">
+                            Horraires
+                        </div>
+                        <ul class="catagory-list">
+                            <li>
+                                <a href="#">Lun : 8h - 19h</a>
+                            </li>
+                            <li>
+                                <a href="#">Mar : 8h - 19h</a>
+                            </li>
+                            <li>
+                                <a href="#">Mer : 8h - 19h</a>
+                            </li>
+                            <li>
+                                <a href="#">Jeu : 8h - 19h</a>
+                            </li>
+                            <li>
+                                <a href="#">Ven : 8h - 19h</a>
+                            </li>
+                            <li>
+                                <a href="#">Sam : 8h - 19h</a>
+                            </li>
+                            <li>
+                                <a href="#">Dim : 8h - 19h</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end catagory -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- blog content -->
+
+    <div class="blod-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- DEBUT DE LA LISTE DES CARTES POUR UNE FUTURE BOUCLE -->
+                    <div class="row">
+
+                        <h1>Liste des produits</h1>
+
+                        <!-- blog item -->
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="featured-blog-box">
+                                <div class="featured-img">
+                                    <img alt="" src="{{ absolute_url(asset("assets/images/blog-1.jpg")) }}">
+                                    <div class="featured-lable-blog">
+                                        <p class="admin-lable">
+                                            <i class="icofont icofont-user-alt-7"></i> Tomates</p>
+                                        <p class="blog-date">
+                                            <i class="icofont icofont-ui-calendar"></i> ajouté le : 22/11/2018</p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <a href="blog-details.html" class="featured-data">
+                                    <div class="blog-title">Tomates</div>
+                                    <div class="blog-description">Les bonnes tomates du jardin</div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- end blog item -->
+
+                        <!-- blog item -->
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="featured-blog-box">
+                                <div class="featured-img">
+                                    <img alt="" src="{{ absolute_url(asset("assets/images/blog-1.jpg")) }}">
+                                    <div class="featured-lable-blog">
+                                        <p class="admin-lable">
+                                            <i class="icofont icofont-user-alt-7"></i> Tomates</p>
+                                        <p class="blog-date">
+                                            <i class="icofont icofont-ui-calendar"></i> ajouté le : 22/11/2018</p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <a href="blog-details.html" class="featured-data">
+                                    <div class="blog-title">Tomates</div>
+                                    <div class="blog-description">Les bonnes tomates du jardin</div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- end blog item -->
+
+                        <!-- blog item -->
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="featured-blog-box">
+                                <div class="featured-img">
+                                    <img alt="" src="{{ absolute_url(asset("assets/images/blog-1.jpg")) }}">
+                                    <div class="featured-lable-blog">
+                                        <p class="admin-lable">
+                                            <i class="icofont icofont-user-alt-7"></i> Tomates</p>
+                                        <p class="blog-date">
+                                            <i class="icofont icofont-ui-calendar"></i> ajouté le : 22/11/2018</p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <a href="blog-details.html" class="featured-data">
+                                    <div class="blog-title">Tomates</div>
+                                    <div class="blog-description">Les bonnes tomates du jardin</div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- end blog item -->
+
+                        <!-- blog item -->
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="featured-blog-box">
+                                <div class="featured-img">
+                                    <img alt="" src="{{ absolute_url(asset("assets/images/blog-1.jpg")) }}">
+                                    <div class="featured-lable-blog">
+                                        <p class="admin-lable">
+                                            <i class="icofont icofont-user-alt-7"></i> Tomates</p>
+                                        <p class="blog-date">
+                                            <i class="icofont icofont-ui-calendar"></i> ajouté le : 22/11/2018</p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <a href="blog-details.html" class="featured-data">
+                                    <div class="blog-title">Tomates</div>
+                                    <div class="blog-description">Les bonnes tomates du jardin</div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- end blog item -->
+
+                        <!-- blog item -->
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="featured-blog-box">
+                                <div class="featured-img">
+                                    <img alt="" src="{{ absolute_url(asset("assets/images/blog-1.jpg")) }}">
+                                    <div class="featured-lable-blog">
+                                        <p class="admin-lable">
+                                            <i class="icofont icofont-user-alt-7"></i> Tomates</p>
+                                        <p class="blog-date">
+                                            <i class="icofont icofont-ui-calendar"></i> ajouté le : 22/11/2018</p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <a href="blog-details.html" class="featured-data">
+                                    <div class="blog-title">Tomates</div>
+                                    <div class="blog-description">Les bonnes tomates du jardin</div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- end blog item -->
+
+
+
+                    </div>
+                    <!-- FIN DE LA LISTE DES CARTES POUR BOUCLE FUTURE -->
+
+                    <!-- blog pagination -->
+                    <div class="text-center margin-b-20">
+                        <a href="#" class="btn-theme">Voir liste complète</a>
+                    </div>
+                    <!-- end blog pagination -->
+
+                </div>
+                <!--end blog post -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

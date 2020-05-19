@@ -1,0 +1,243 @@
+{% extends 'base.html.twig' %}
+
+{% block navbar %}
+    {% if app.user and is_granted('ROLE_FARMER') %}
+        {% include 'farmer/navbar.html.twig' %}
+    {% else %}
+        {% include 'consumer/navbar.html.twig' %}
+    {%endif %}
+{% endblock %}
+
+{% block content %}
+
+    <section style="padding-top: 35px">
+
+        <div class="container">
+
+            <div class="section-title text-center" style="margin-bottom: 30px">
+                <span>Nos fermiers</span>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    {% for farmerBy2 in farmers|batch(2) %}
+                        <div class="row">
+                            {% for farmer in farmerBy2 %}
+
+                                <div
+                                        style="padding-bottom: 20px;"
+                                        class="col-sm-6"
+                                        id="{{ farmer.id }}"
+                                        data-farmName="{{ farmer.farmName }}"
+                                        data-description="{{ farmer.farmDescription }}"
+                                        data-slug="{{ farmer.slug }}"
+                                        data-farm="{{ path('farm_show', {id: farmer.id, slug: farmer.slug}) }}"
+                                >
+                                    <div style="padding-bottom: 20px;" class="featured-blog-box">
+                                        <a href="{{ path('farm_show', {id: farmer.id, slug: farmer.slug}) }}"
+                                           class="featured-data">
+                                            <div class="featured-img">
+                                                {% if farmer.photoFarm is null %}
+                                                    <img class="img-responsive" style="height: 200px; width: max-content;" alt="ferme" src="/assets/images/farm.jpg">
+                                                {% else %}
+                                                    <img class="img-responsive" style="height: 200px; width: max-content;" alt="ferme" src="/uploads/{{ farmer.photoFarm }}">
+                                                {% endif %}
+                                                <div class="featured-lable-blog">
+                                                    <p class="admin-lable">
+                                                        <i class="icofont icofont-user-alt-7"></i> {{ farmer.user.fullName }}
+                                                    </p>
+
+                                                    <p class="blog-date">
+                                                        <i class="icofont icofont-ui-calendar"></i> {{ (farmer.user.createAt | date("d.m.Y") ) }}
+                                                    </p>
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                            <div class="blog-title">{{ farmer.farmName [:20] ~ '...' }}</div>
+                                            <div class="blog-description">
+                                                {{ farmer.farmDescription [:90] ~ '...' }}
+                                            </div>
+                                        </a>
+                                        <div class="blog-description text-center">
+                                            {% if farmer.comments | length > 0 %}
+                                                <div style="padding-bottom:10px">
+                                                    Évaluation : {% include 'part/_rating.html.twig' with {'rating': farmer.averageScore} %}
+                                                </div>
+                                            {% else %}
+                                                <div style="color: orangered; padding-bottom: 10px;">
+                                                    Aucune Évaluation
+                                                </div>
+                                            {% endif %}
+
+                                            <button href="#sectionMap" id="mapButton" class="btn btn-success btn btn-block" onclick="changeMarkerPos({{ farmer.lat }}, {{ farmer.lng }}, {{ farmer.id }}); document.getElementById('map').scrollIntoView(false);window.scrollBy(0, 80); "><i class="fas fa-map-marker-alt"></i> Localiser</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {#</div>#}
+                    {% endfor %}
+
+                </div>
+
+                <div class="col-md-6">
+                    <div style="height: 500px" class="map" id="map"></div>
+
+                    <!-- Barre de recherche  -->
+
+
+                    <form action="{{ path('consumer') }}" method="post">
+                        <div class="blog-sidebar" style="margin-bottom: 0px">
+                            <div class="side-bar-title">
+                                Recherche
+                            </div>
+
+                            <div class="input-group subscribe-group">
+                                <input class="form-control" name="searchBar" placeholder="Ville, Code Postal, Producteur" type="text">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="input-group-btn">Recherche</span>
+                                    </button>
+                                <a href="{{ path("consumer") }}">
+                                <button class="btn btn-default" type="submit">
+                                <span class="">X</span>
+                                </button>
+                                </a>
+                                </span>
+                            </div>
+
+                            <br>
+
+                            <div class="side-bar-title">
+                                Filtrer par catégories
+                            </div>
+
+                            <div>
+                                {% for category in categories %}
+                                        <label class="containerCheckbox"><span style="color:#7D7D7D; font-weight: lighter">{{ category.name }}</span>
+                                            <input type="checkbox" name="category" value="{{ category.id}}">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Fin Barre de recherche et categorie  -->
+
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-3 text-center">
+                    {{ knp_pagination_render(farmers) }}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script type="text/javascript">
+
+        var new_lat = 46.227638;
+        var new_lng = 2.213749000000007;
+        var new_zoom = 6;
+
+        let map;
+        let marker;
+        var currentInfoWindow = null;
+
+
+        if (typeof (navigator.geolocation) !== "undefined") {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                new_lat = position.coords.latitude;
+                new_lng = position.coords.longitude;
+                new_zoom = 10;
+                initMap();
+            })
+        }
+
+
+        getLocation();
+
+        function initMap() {
+
+            let locations = [
+                {% for farmer in farmers %}
+                ["{{ farmer.farmName|escape('js') }}", {{ farmer.lat }}, {{ farmer.lng }}, {{ farmer.id }}, "{{ farmer.farmDescription|escape('js') }}", {{ farmer.id }}, "{{ farmer.slug|escape('js') }}"],
+                {% endfor %}
+            ];
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: new_zoom,
+                center: new google.maps.LatLng(new_lat, new_lng),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+
+            for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    animation: google.maps.Animation.DROP,
+                    map: map
+                });
+
+                marker.setValues({type: "point", id: locations[i][3]});
+                let farmerSelect = document.getElementById(marker.get("id"));
+                let farmName = farmerSelect.getAttribute('data-farmName');
+                let description = farmerSelect.getAttribute('data-description');
+                let farm = farmerSelect.getAttribute('data-farm');
+
+                let infowindow = new google.maps.InfoWindow();
+                let content = '<div> <h4>' + farmName + '</h4>' + '<p>' + description + '</p><br/> <br/> <a href=' + farm + '>Fiche de la ferme</a></div>';
+
+                google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
+                    return function () {
+                        if (currentInfoWindow != null) {
+                            currentInfoWindow.close();
+                        }
+                        infowindow.setContent(content);
+                        infowindow.open(map, marker);
+                        currentInfoWindow = infowindow;
+                    }
+                })(marker, content, infowindow));
+            }
+        }
+
+        function changeMarkerPos(lat, lon, id) {
+            if (currentInfoWindow != null) {
+                currentInfoWindow.close();
+            }
+            let myLatLng = new google.maps.LatLng(lat, lon);
+            marker.setPosition(myLatLng);
+            map.setZoom(17);
+            map.panTo(myLatLng);
+            let farmerSelect = document.getElementById(id);
+            let farmName = farmerSelect.getAttribute('data-farmName');
+            let description = farmerSelect.getAttribute('data-description');
+            let farm = farmerSelect.getAttribute('data-farm');
+
+            let infowindow = new google.maps.InfoWindow();
+            let content = '<div> <h4>' + farmName + '</h4>' + '<p>' + description + '</p><br/> <br/> <a href=' + farm + '>Fiche de la ferme</a></div>';
+            google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
+                return function () {
+                    if (currentInfoWindow != null) {
+                        currentInfoWindow.close();
+                    }
+                    infowindow.setContent(content);
+                    infowindow.open(map, marker);
+                    currentInfoWindow = infowindow;
+                }
+            })(marker, content, infowindow));
+
+        }
+
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJMqSZgwvVasqXTm2FbQ-MlbM7O55xPl0&callback=initMap">
+    </script>
+
+
+{% endblock %}
